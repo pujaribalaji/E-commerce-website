@@ -4,6 +4,7 @@ import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
 import "../styles/CartStyles.css";
+import axios from "axios";
 
 const CartPage = () => {
   const [auth, setAuth] = useAuth();
@@ -37,6 +38,45 @@ const CartPage = () => {
       console.log(error);
     }
   };
+
+  const checkouthandler = async (amount) => {
+    try {
+      const {
+        data: { key },
+      } = await axios.get("http://localhost:8080/api/getkey");
+      const {
+        data: { order },
+      } = await axios.post("http://localhost:8080/checkout", { amount });
+
+      const options = {
+        key,
+        amount: order.amount,
+        currency: "INR",
+        name: "Sinmplyjs",
+        description: "Razorpay tutorial",
+        image: "https://avatars.githubusercontent.com/u/96648429?s=96&v=4",
+        order_id: order.id,
+        callback_url: "http://localhost:8080/paymentverification",
+        prefill: {
+          name: "Sagar gupta",
+          email: "anandguptasir@gmail.com",
+          contact: "1234567890",
+        },
+        notes: {
+          address: "razorpay official",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const razor = new window.Razorpay(options);
+      razor.open();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Layout>
       <div className="container">
@@ -94,7 +134,7 @@ const CartPage = () => {
                     <button
                       type="button"
                       className="btn btn-success m-2"
-                      onClick={() => removeCartItem(p._id)}
+                      onClick={() => checkouthandler(p.price)}
                     >
                       Submit
                     </button>

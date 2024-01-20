@@ -149,57 +149,56 @@ const HomePage = () => {
   return (
     <Layout title={"Medicines - Best offers - Dawaiwalla"}>
       {/* movable Advertisement Banner section */}
-      <div className="container">
-        <div id="carouselExampleDark" className="carousel carousel-dark slide">
-          <div id="myCarousel-indicators" className="carousel-indicators">
-            {banners.map((_banner, index) => (
-              <button
-                key={index}
-                type="button"
-                data-bs-target="#carouselExampleDark"
-                data-bs-slide-to={index}
-                className={index === 0 ? "active" : ""}
-                aria-label={`Slide ${index + 1}`}
-              />
-            ))}
-          </div>
-          <div className="carousel-inner">
-            {banners?.map((banner, index) => (
-              <div
-                key={index}
-                className={`carousel-item ${index === 0 ? "active" : ""}`}
-                data-bs-interval={10000}
-              >
-                <img
-                  src={`/api/v1/banner/banner-image/${banner._id}`}
-                  className="d-block w-100 img-thumbnail"
-                  alt={banner.altText}
-                />
-                <div className="carousel-caption d-none d-md-block">
-                  <h5>{banner.caption}</h5>
-                </div>
-              </div>
-            ))}
-          </div>
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleDark"
-            data-bs-slide="prev"
-          >
-            <span className="carousel-control-prev-icon" aria-hidden="true" />
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleDark"
-            data-bs-slide="next"
-          >
-            <span className="carousel-control-next-icon" aria-hidden="true" />
-            <span className="visually-hidden">Next</span>
-          </button>
+
+      <div id="carouselExampleDark" className="carousel carousel-dark slide">
+        <div id="myCarousel-indicators" className="carousel-indicators">
+          {banners.map((_banner, index) => (
+            <button
+              key={index}
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to={index}
+              className={index === 0 ? "active" : ""}
+              aria-label={`Slide ${index + 1}`}
+            />
+          ))}
         </div>
+        <div className="carousel-inner">
+          {banners?.map((banner, index) => (
+            <div
+              key={index}
+              className={`carousel-item ${index === 0 ? "active" : ""}`}
+              data-bs-interval={10000}
+            >
+              <img
+                src={`/api/v1/banner/banner-image/${banner._id}`}
+                className="d-block w-100 img-thumbnail"
+                alt={banner.altText}
+              />
+              <div className="carousel-caption d-none d-md-block">
+                <h5>{banner.caption}</h5>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="prev"
+        >
+          <span className="carousel-control-prev-icon" aria-hidden="true" />
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="next"
+        >
+          <span className="carousel-control-next-icon" aria-hidden="true" />
+          <span className="visually-hidden">Next</span>
+        </button>
       </div>
 
       <br />
@@ -213,14 +212,14 @@ const HomePage = () => {
       </div>
 
       {/* shop by health category */}
-      <section className="ptb50" style={{ paddingBottom: "20px" }}>
+      <section className="ptb50 small" style={{ paddingBottom: "20px" }}>
         <div className="container carousel-wrap iconCarousel bg-light mt-5 pt-3">
           <div className="text-center pb20">
             <h2 className="catHeading uppercase">SHOP BY HEALTH CATEGORIES</h2>
             <hr style={{ margin: "auto" }} />
             <br />
           </div>
-          <div className="row home-page">
+          <div className="row small home-page ">
             <div className="col-sm text-center">
               <a
                 onClick={navigateToBonesCategory}
@@ -348,8 +347,8 @@ const HomePage = () => {
           <h4 className="text-center mt-4">Filter By Price</h4>
           <div className="d-flex flex-column">
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-              {Prices?.map((p) => (
-                <div key={p._id}>
+              {Prices?.map((p, index) => (
+                <div key={p._id || index}>
                   <Radio value={p.array}>{p.name}</Radio>
                 </div>
               ))}

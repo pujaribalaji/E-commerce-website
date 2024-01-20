@@ -91,11 +91,10 @@ const ProductDetails = () => {
                 border: "2px solid black",
                 borderRadius: "10px",
                 color: "black",
-                padding: "5px",
+                padding: "10px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                width: "20%",
                 fontSize: "18px",
                 fontWeight: "bold",
               }}
